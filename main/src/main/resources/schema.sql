@@ -1,3 +1,13 @@
+DROP TABLE IF EXISTS agreement;
+DROP TABLE IF EXISTS tpp_product;
+DROP TABLE IF EXISTS tpp_template_register_balance;
+DROP TABLE IF EXISTS account;
+DROP TABLE IF EXISTS account_pool;
+DROP TABLE IF EXISTS tpp_product_register;
+DROP TABLE IF EXISTS tpp_ref_product_register_type;
+DROP TABLE IF EXISTS tpp_ref_product_class;
+DROP TABLE IF EXISTS tpp_ref_account_type;
+
 CREATE TABLE IF NOT EXISTS tpp_ref_account_type
 (
 	internal_id serial PRIMARY KEY ,
@@ -15,7 +25,6 @@ CREATE TABLE IF NOT EXISTS tpp_ref_product_class
     subclass_code VARCHAR(50),
     subclass_name VARCHAR(100)
 );
-
 
 CREATE TABLE IF NOT EXISTS tpp_ref_product_register_type
 (
