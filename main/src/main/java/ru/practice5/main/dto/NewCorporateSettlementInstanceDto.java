@@ -5,9 +5,11 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class NewCorporateSettlementInstanceDto {
     public Integer instanceId;
     public String productType;

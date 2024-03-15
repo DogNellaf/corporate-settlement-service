@@ -8,18 +8,16 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TppRefProductRegisterTypeRepository extends JpaRepository<TppRefProductRegisterType, Long> {
-    @Query(value = "SELECT * " +
-            "FROM tpp_ref_product_register_type rt " +
-            "JOIN tpp_ref_product_class cl ON rt.product_class_code == cl.value" +
-            "WHERE cl.value == :productCode AND rt.account_type == 'Клиентский'",
+    @Query(value = "SELECT rt.* " +
+            "FROM tpp_ref_product_register_type as rt " +
+            "JOIN tpp_ref_product_class as cl ON rt.product_class_code = cl.value " +
+            "WHERE cl.value = :value AND rt.account_type = 'Клиентский'",
             nativeQuery = true)
-    List<TppRefProductRegisterType> findAllByValue(String value);
+    List<TppRefProductRegisterType> findByParams(String value);
 
     @Query(value = "SELECT * " +
         "FROM tpp_ref_product_register_type rt " +
         "WHERE rt.\"value\" = :value",
         nativeQuery = true)
     Optional<TppRefProductRegisterType> findOneByValue(String value);
-
-//    Optional<TppRefProductRegisterType> findOneByValue(String value);
 }

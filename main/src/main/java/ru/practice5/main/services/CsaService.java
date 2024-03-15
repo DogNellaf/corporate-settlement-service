@@ -2,6 +2,7 @@ package ru.practice5.main.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practice5.main.dto.csa.CsaOutputDto;
 import ru.practice5.main.dto.csa.CsaOutputParam;
 import ru.practice5.main.dto.NewCorporateSettlementAccountDto;
@@ -22,6 +23,7 @@ public class CsaService {
     private final AccountPoolRepository accountPoolRepository;
     private final AccountRepository accountRepository;
 
+    @Transactional
     public CsaOutputDto create(NewCorporateSettlementAccountDto dto) {
 
         // проверка обязательных полей, шаг 1
@@ -45,28 +47,28 @@ public class CsaService {
         }
 
         // шаг 4
-        var accounts_pool = accountPoolRepository.findAll().stream();
-        if (dto.getBranchCode() != null) {
-            accounts_pool = accounts_pool.filter(x -> x.getBranch_code().equals(dto.branchCode));
+        var accounts_pool = accountPoolRepository.findAll();
+        if (dto.branchCode != null) {
+            accounts_pool = accounts_pool.stream().filter(x -> x.getBranch_code().equals(dto.branchCode)).toList();
         }
 
         if (dto.currencyCode != null) {
-            accounts_pool = accounts_pool.filter(x -> x.getCurrency_code().equals(dto.currencyCode));
+            accounts_pool = accounts_pool.stream().filter(x -> x.getCurrency_code().equals(dto.currencyCode)).toList();
         }
 
         if (dto.mdmCode != null) {
-            accounts_pool = accounts_pool.filter(x -> x.getMdm_code().equals(dto.mdmCode));
+            accounts_pool = accounts_pool.stream().filter(x -> x.getMdm_code().equals(dto.mdmCode)).toList();
         }
 
         if (dto.priorityCode != null) {
-            accounts_pool = accounts_pool.filter(x -> x.getPriority_code().equals(dto.priorityCode));
+            accounts_pool = accounts_pool.stream().filter(x -> x.getPriority_code().equals(dto.priorityCode)).toList();
         }
 
         if (dto.registryTypeCode != null) {
-            accounts_pool = accounts_pool.filter(x -> x.getRegistry_type_code().equals(dto.registryTypeCode));
+            accounts_pool = accounts_pool.stream().filter(x -> x.getRegistry_type_code().equals(dto.registryTypeCode)).toList();
         }
 
-        var account_pool = accounts_pool.findFirst().get();
+        var account_pool = accounts_pool.get(0);
         var account = accountRepository.findOneByAccountPoolId(account_pool.getId());
         var entity = new TppProductRegister(
                 -1L,

@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class CsiService {
 
     private final TppProductRepository tppProductRepository;
@@ -25,6 +24,7 @@ public class CsiService {
     private final TppRefProductRegisterTypeRepository tppRefProductRegisterTypeRepository;
     private final CsaService csaService;
 
+    @Transactional
     public CsiOutputDto create(NewCorporateSettlementInstanceDto dto) {
 
         // проверка всех обязательных полей, шаг 1
@@ -82,15 +82,18 @@ public class CsiService {
             }
 
             // шаг 1.2
-            for (var number : dto.InstanceArrangementDto) {
-                var agreements = agreementRepository.findByNumber(number.Number);
-                if (!agreements.isEmpty()) {
-                    var message = "Параметр № Дополнительного соглашения (сделки) Number %s уже существует для ЭП с ИД %s.".formatted(number.Number, dto.contractNumber);
-                    throw new ValidationException(message);
+            if (dto.getInstanceArrangementDto() != null) {
+                for (var number : dto.InstanceArrangementDto) {
+                    var agreements = agreementRepository.findByNumber(number.Number);
+                    if (!agreements.isEmpty()) {
+                        var message = "Параметр № Дополнительного соглашения (сделки) Number %s уже существует для ЭП с ИД %s.".formatted(number.Number, dto.contractNumber);
+                        throw new ValidationException(message);
+                    }
                 }
             }
+
             // шаг 1.3
-            var registerTypes = tppRefProductRegisterTypeRepository.findAllByValue(dto.productCode);
+            var registerTypes = tppRefProductRegisterTypeRepository.findByParams(dto.productCode);
             if (registerTypes.isEmpty()) {
                 var message = "КодПродукта %s не найдено в Каталоге продуктов tpp_ref_product_class".formatted(dto.productCode);
                 throw new ValidationException(message);
@@ -99,7 +102,7 @@ public class CsiService {
             // шаг 1.4
             var product = new TppProduct();
             product.setId(-1L);
-            product.setProduct_code_id(dto.instanceId);
+            product.setProduct_code_id(dto.contractId);
             //client?
             product.setType(registerTypes.get(0).getValue());
             product.setNumber(dto.contractNumber);
@@ -116,19 +119,19 @@ public class CsiService {
             product.setTax_rate(dto.taxPercentageRate);
             // ? product.setReasone_close();
             // ? product.setState()
-            tppProductRepository.save(product);
+            product = tppProductRepository.save(product);
 //            var product_id = product.getId();
 
             // шаг 1.5
             var accounts_ids = new ArrayList<String>();
             for (var type : registerTypes) {
                 var account_id = csaService.create(new NewCorporateSettlementAccountDto(
-                        dto.instanceId.longValue(),
+                        product.getId(),
                         type.getValue(),
                         null,
                         dto.getIsoCurrencyCode(),
                         dto.getBranchCode(),
-                        dto.priority.toString(),
+                        "00",
                         dto.mdmCode,
                         null,
                         null,
@@ -139,7 +142,7 @@ public class CsiService {
             }
 
             return new CsiOutputDto(
-                    new CsiOutputDataParam(dto.instanceId.toString()),
+                    new CsiOutputDataParam(product.getId().toString()),
                     accounts_ids,
                     null
             );
