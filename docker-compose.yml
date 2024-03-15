@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  main:
+    build: main
+    container_name: main
+    ports:
+      - "9090:9090"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+
+  db:
+    image: postgres:15-alpine
+    container_name: db
+    ports:
+      - "6541:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
