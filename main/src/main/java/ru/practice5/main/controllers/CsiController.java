@@ -3,7 +3,7 @@ package ru.practice5.main.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practice5.main.services.CsiService;
-import ru.practice5.main.dto.CsiOutputDto;
+import ru.practice5.main.dto.csi.CsiOutputDto;
 import ru.practice5.main.dto.NewCorporateSettlementInstanceDto;
 
 @RestController

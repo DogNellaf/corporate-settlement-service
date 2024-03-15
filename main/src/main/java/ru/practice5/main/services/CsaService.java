@@ -2,8 +2,8 @@ package ru.practice5.main.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.practice5.main.dto.CsaOutputDto;
-import ru.practice5.main.dto.CsaOutputParam;
+import ru.practice5.main.dto.csa.CsaOutputDto;
+import ru.practice5.main.dto.csa.CsaOutputParam;
 import ru.practice5.main.dto.NewCorporateSettlementAccountDto;
 import ru.practice5.main.exception.NotFoundException;
 import ru.practice5.main.exception.ValidationException;

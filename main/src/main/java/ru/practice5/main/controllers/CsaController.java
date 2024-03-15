@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ru.practice5.main.services.CsaService;
-import ru.practice5.main.dto.CsaOutputDto;
+import ru.practice5.main.dto.csa.CsaOutputDto;
 import ru.practice5.main.dto.NewCorporateSettlementAccountDto;
 
 @RestController

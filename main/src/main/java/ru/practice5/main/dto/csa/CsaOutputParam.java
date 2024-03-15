@@ -1,4 +1,4 @@
-package ru.practice5.main.dto;
+package ru.practice5.main.dto.csa;
 
 import lombok.AllArgsConstructor;
 

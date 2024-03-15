@@ -18,11 +18,11 @@ public class TppProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long product_code_id;
+    private Integer product_code_id;
     private Long client_id;
     private String type;
     private String number;
-    private Long priority;
+    private Integer priority;
     private LocalDateTime date_of_conclusion;
     private LocalDateTime start_date_time;
     private LocalDateTime end_date_time;

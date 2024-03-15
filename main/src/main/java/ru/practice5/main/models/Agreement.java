@@ -18,11 +18,7 @@ public class Agreement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private TppProduct product;
-
+    private String product_id;
     private String general_agreement_id;
     private String supplementary_agreement_id;
     private String arrangement_type;
