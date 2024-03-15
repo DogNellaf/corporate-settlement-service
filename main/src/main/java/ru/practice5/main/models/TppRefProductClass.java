@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TppRefProductClass {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long internal_id;
     private String value;
     private String gbi_code;

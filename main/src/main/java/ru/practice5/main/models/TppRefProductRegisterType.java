@@ -16,19 +16,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class TppRefProductRegisterType {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long internal_id;
     private String value;
     private String register_type_name;
-
-    @ManyToOne
-    @JoinColumn(name = "product_class_code")
-    private TppRefProductClass product_class;
-
+    private String product_class_code;
     private LocalDateTime register_type_start_date;
     private LocalDateTime register_type_end_date;
-
-    @ManyToOne
-    @JoinColumn(name = "account_type")
-    private TppRefAccountType account_type;
+    private String account_type;
 }

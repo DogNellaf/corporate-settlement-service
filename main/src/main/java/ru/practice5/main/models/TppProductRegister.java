@@ -17,11 +17,7 @@ public class TppProductRegister {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long product_id;
-
-    @ManyToOne
-    @JoinColumn(name = "type")
-    private TppRefProductRegisterType type;
-
+    private String type;
     private Long account;
     private String currency_code;
     private String state;

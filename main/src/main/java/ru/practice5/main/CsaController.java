@@ -1,6 +1,7 @@
 package ru.practice5.main;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ru.practice5.main.dto.CsaOutputDto;
 import ru.practice5.main.dto.CsaOutputParam;
@@ -13,6 +14,7 @@ import ru.practice5.main.repository.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/corporate-settlement-account")
+@Transactional
 public class CsaController {
 
     private final TppProductRegisterRepository tppProductRegisterRepository;
@@ -23,9 +25,9 @@ public class CsaController {
     @PostMapping("create")
     public CsaOutputDto create(@RequestBody NewCorporateSettlementAccountDto dto) {
 
-        // проверка всех обязательных полей, шаг 1
+        // проверка обязательных полей, шаг 1
         if (dto.getInstanceId() == null) {
-            throw new ValidationException("Имя обязательного параметра productType не заполнено.");
+            throw new ValidationException("Имя обязательного параметра instanceId не заполнено.");
         }
 
         // шаг 2
@@ -36,9 +38,9 @@ public class CsaController {
         }
 
         // шаг 3
-        var types = tppRefProductRegisterTypeRepository.findAllByValue(dto.registryTypeCode);
+        var type = tppRefProductRegisterTypeRepository.findOneByValue(dto.registryTypeCode);
 
-        if (types.isEmpty()) {
+        if (type.isEmpty()) {
             var message = "Код Продукта %s не найдено в Каталоге продуктов public.tpp_ref_product_register_type для данного типа Регистра.".formatted(dto.instanceId);
             throw new NotFoundException(message);
         }
@@ -70,7 +72,7 @@ public class CsaController {
         var entity = new TppProductRegister(
                 -1L,
                 dto.instanceId,
-                types.stream().findFirst().get(),
+                type.stream().findFirst().get().getValue(),
                 account.getId(),
                 dto.currencyCode,
                 "OPEN",
