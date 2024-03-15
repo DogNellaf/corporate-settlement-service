@@ -13,4 +13,6 @@ public interface TppRefProductRegisterTypeRepository extends JpaRepository<TppRe
             "WHERE cl.value == :productCode AND rt.account_type == 'Клиентский'",
             nativeQuery = true)
     List<TppRefProductRegisterType> findByValue(String productCode);
+
+    List<TppRefProductRegisterType> findAllByValue(String value);
 }

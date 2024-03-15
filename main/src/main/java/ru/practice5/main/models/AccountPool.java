@@ -16,7 +16,7 @@ public class AccountPool {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String account_pool;
+    private String branch_code;
     private String currency_code;
     private String mdm_code;
     private String priority_code;

@@ -1,34 +1,22 @@
 package ru.practice5.main.dto;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class NewCorporateSettlementAccountDto {
-    public Integer instanceId;
-    public String productType;
-    public String productCode;
-    public String registerType;
+    public Long instanceId;
+    public String registryTypeCode;
+    public String accountType;
+    public String currencyCode;
+    public String branchCode;
+    public String priorityCode;
     public String mdmCode;
-    public String contractNumber;
-    public LocalDateTime contractDate;
-    public Integer priority;
-    public Float interestRatePenalty;
-    public Float minimalBalance;
-    public Float thresholdAmount;
-    public String accountingDetails;
-    public String rateType;
-    public Float taxPercentageRate;
-    public Float technicalOverdraftLimitAmount;
-    public Integer contractId;
-    public String BranchCode;
-    public String IsoCurrencyCode;
-    public String urgencyCode;
-    public Integer ReferenceCode;
-    public AdditionalPropertiesVipDto additionalPropertiesVip;
-    public List<InstanceArrangementDto> InstanceArrangementDto;
+    public String clientCode;
+    public String trainRegion;
+    public String counter;
+    public String salesCode;
 }
