@@ -1,4 +1,4 @@
-package ru.practice5.main;
+package ru.practice5.main.services;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
