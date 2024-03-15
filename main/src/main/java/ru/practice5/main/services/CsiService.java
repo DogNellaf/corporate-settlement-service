@@ -21,37 +21,47 @@ public class CsiService {
         // проверка всех обязательных полей, шаг 1
 
         if (dto.productType == null) {
-            throw new ValidationException("productType <значение> не заполнено.");
+            throw new ValidationException("Имя обязательного параметра productType не заполнено.");
         }
+
         if (dto.productCode == null) {
-            throw new ValidationException("productCode <значение> не заполнено.");
+            throw new ValidationException("Имя обязательного параметра productCode не заполнено.");
         }
+
         if (dto.registerType == null) {
-            throw new ValidationException("registerType <значение> не заполнено.");
+            throw new ValidationException("Имя обязательного параметра registerType не заполнено.");
         }
+
         if (dto.mdmCode == null) {
-            throw new ValidationException("mdmCode <значение> не заполнено.");
+            throw new ValidationException("Имя обязательного параметра mdmCode не заполнено.");
         }
+
         if (dto.contractNumber == null) {
-            throw new ValidationException("contractNumber <значение> не заполнено.");
+            throw new ValidationException("Имя обязательного параметра contractNumber не заполнено.");
         }
+
         if (dto.contractDate == null) {
-            throw new ValidationException("contractDate <значение> не заполнено.");
+            throw new ValidationException("Имя обязательного параметра contractDate не заполнено.");
         }
+
         if (dto.priority == null) {
-            throw new ValidationException("priority <значение> не заполнено.");
+            throw new ValidationException("Имя обязательного параметра priority не заполнено.");
         }
+
         if (dto.contractId == null) {
-            throw new ValidationException("contractId <значение> не заполнено.");
+            throw new ValidationException("Имя обязательного параметра contractId не заполнено.");
         }
+
         if (dto.BranchCode == null) {
-            throw new ValidationException("BranchCode <значение> не заполнено.");
+            throw new ValidationException("Имя обязательного параметра BranchCode не заполнено.");
         }
+
         if (dto.IsoCurrencyCode == null) {
-            throw new ValidationException("IsoCurrencyCode <значение> не заполнено.");
+            throw new ValidationException("Имя обязательного параметра IsoCurrencyCode не заполнено.");
         }
+
         if (dto.urgencyCode == null) {
-            throw new ValidationException("urgencyCode <значение> не заполнено.");
+            throw new ValidationException("Имя обязательного параметра urgencyCode не заполнено.");
         }
 
         // шаг 1.1
