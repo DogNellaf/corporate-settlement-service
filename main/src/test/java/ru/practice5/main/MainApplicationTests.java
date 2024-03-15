@@ -1,4 +1,4 @@
-package com.practice5.main;
+package ru.practice5.main;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
