@@ -1,25 +1,25 @@
 package ru.practice5.main.models;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "tpp_template_register_balance")
+@Table(name = "account_pool")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TppTemplateRegisterBalance {
+public class AccountPool {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long register_id;
-    private Float amount;
-    private String order;
-    private LocalDateTime last_modify_date;
+    private String branch_code;
+    private String currency_code;
+    private String mdm_code;
+    private String priority_code;
+    private String registry_type_code;
 }
