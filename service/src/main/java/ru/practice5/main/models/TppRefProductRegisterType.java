@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
@@ -18,12 +20,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class TppRefProductRegisterType {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long internal_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long internalId;
     private String value;
-    private String register_type_name;
-    private String product_class_code;
-    private LocalDateTime register_type_start_date;
-    private LocalDateTime register_type_end_date;
-    private String account_type;
+    private String registerTypeName;
+    private String productClassCode;
+    private LocalDateTime registerTypeStartDate;
+    private LocalDateTime registerTypeEndDate;
+    private String accountType;
 }

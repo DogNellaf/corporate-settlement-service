@@ -1,12 +1,14 @@
 package ru.practice5.main.dto.csi;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.List;
 
 @AllArgsConstructor
+@Getter
 public class CsiOutputDto {
-    public CsiOutputDataParam data;
-    public List<String> registerId;
-    public List<String> supplementaryAgreementId;
+    private CsiOutputDataParam data;
+    private List<String> registerId;
+    private List<String> supplementaryAgreementId;
 }

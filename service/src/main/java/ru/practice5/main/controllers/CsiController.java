@@ -1,10 +1,13 @@
 package ru.practice5.main.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import ru.practice5.main.services.CsiService;
-import ru.practice5.main.dto.csi.CsiOutputDto;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.practice5.main.dto.NewCorporateSettlementInstanceDto;
+import ru.practice5.main.dto.csi.CsiOutputDto;
+import ru.practice5.main.services.CsiService;
 
 @RestController
 @RequiredArgsConstructor

@@ -5,7 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,26 +23,27 @@ public class Agreement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String product_id;
-    private String general_agreement_id;
-    private String supplementary_agreement_id;
-    private String arrangement_type;
-    private Long sheduler_job_id;
+    private Long productId;
+    private String generalAgreementId;
+    private String supplementaryAgreementId;
+    private String arrangementType;
+    @Column(name = "sheduler_job_id")
+    private Long schedulerJobId;
     private String number;
-    private LocalDateTime opening_date;
-    private LocalDateTime closing_date;
-    private LocalDateTime cancel_date;
-    private Long validity_duration;
-    private String cancellation_reason;
+    private LocalDateTime openingDate;
+    private LocalDateTime closingDate;
+    private LocalDateTime cancelDate;
+    private Long validityDuration;
+    private String cancellationReason;
     private String status;
-    private LocalDateTime interest_calculation_date;
-    private Float interest_rate;
+    private LocalDateTime interestCalculationDate;
+    private Float interestRate;
     private Float coefficient;
-    private String coefficient_action;
-    private Float minimum_interest_rate;
-    private Float minimum_interest_rate_coefficient;
-    private String minimum_interest_rate_coefficient_action;
-    private Float maximal_interest_rate;
-    private Float maximal_interest_rate_coefficient;
-    private String maximal_interest_rate_coefficient_action;
+    private String coefficientAction;
+    private Float minimumInterestRate;
+    private Float minimumInterestRateCoefficient;
+    private String minimumInterestRateCoefficientAction;
+    private Float maximalInterestRate;
+    private Float maximalInterestRateCoefficient;
+    private String maximalInterestRateCoefficientAction;
 }

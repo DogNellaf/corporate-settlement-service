@@ -6,18 +6,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tpp_ref_account_type") //TODO
+@Table(name = "tpp_ref_account_type")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class TppRefAccountType {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long internal_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long internalId;
     private String value;
 }

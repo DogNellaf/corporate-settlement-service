@@ -1,36 +1,36 @@
 package ru.practice5.main.dto;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewCorporateSettlementInstanceDto {
-    public Integer instanceId;
-    public String productType;
-    public String productCode;
-    public String registerType;
-    public String mdmCode;
-    public String contractNumber;
-    public LocalDateTime contractDate;
-    public Integer priority;
-    public Float interestRatePenalty;
-    public Float minimalBalance;
-    public Float thresholdAmount;
-    public String accountingDetails;
-    public String rateType;
-    public Float taxPercentageRate;
-    public Float technicalOverdraftLimitAmount;
-    public Integer contractId;
-    public String BranchCode;
-    public String IsoCurrencyCode;
-    public String urgencyCode;
-    public Integer ReferenceCode;
-    public AdditionalPropertiesVipDto additionalPropertiesVip;
-    public List<InstanceArrangementDto> InstanceArrangementDto;
+    private Integer instanceId;
+    private String productType;
+    private String productCode;
+    private String registerType;
+    private String mdmCode;
+    private String contractNumber;
+    private LocalDateTime contractDate;
+    private Integer priority;
+    private Float interestRatePenalty;
+    private Float minimalBalance;
+    private Float thresholdAmount;
+    private String accountingDetails;
+    private String rateType;
+    private Float taxPercentageRate;
+    private Float technicalOverdraftLimitAmount;
+    private Integer contractId;
+    private String branchCode;
+    private String isoCurrencyCode;
+    private String urgencyCode;
+    private Integer referenceCode;
+    private AdditionalPropertiesVipDto additionalPropertiesVip;
+    private List<InstanceArrangementDto> instanceArrangementDto;
 }

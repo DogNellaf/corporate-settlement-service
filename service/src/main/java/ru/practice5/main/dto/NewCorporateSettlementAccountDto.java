@@ -8,15 +8,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewCorporateSettlementAccountDto {
-    public Long instanceId;
-    public String registryTypeCode;
-    public String accountType;
-    public String currencyCode;
-    public String branchCode;
-    public String priorityCode;
-    public String mdmCode;
-    public String clientCode;
-    public String trainRegion;
-    public String counter;
-    public String salesCode;
+    private Long instanceId;
+    private String registryTypeCode;
+    private String accountType;
+    private String currencyCode;
+    private String branchCode;
+    private String priorityCode;
+    private String mdmCode;
+    private String clientCode;
+    private String trainRegion;
+    private String counter;
+    private String salesCode;
 }

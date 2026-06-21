@@ -2,31 +2,33 @@ package ru.practice5.main.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class InstanceArrangementDto {
-    public String GeneralAgreementId;
-    public String SupplementaryAgreementId;
-    public String arrangementType;
-    public Integer shedulerJobId;
-    public String Number;
-    public LocalDateTime openingDate;
-    public LocalDateTime closingDate;
-    public LocalDateTime CancelDate;
-    public Integer validityDuration;
-    public String cancellationReason;
-    public String Status;
-    public LocalDateTime interestCalculationDate;
-    public Float interestRate;
-    public Float coefficient;
-    public String coefficientAction;
-    public Float minimumInterestRate;
-    public String minimumInterestRateCoefficient;
-    public String minimumInterestRateCoefficientAction;
-    public Float maximalnterestRate;
-    public Float maximalnterestRateCoefficient;
-    public String maximalnterestRateCoefficientAction;
+    private String generalAgreementId;
+    private String supplementaryAgreementId;
+    private String arrangementType;
+    private Integer schedulerJobId;
+    private String number;
+    private LocalDateTime openingDate;
+    private LocalDateTime closingDate;
+    private LocalDateTime cancelDate;
+    private Integer validityDuration;
+    private String cancellationReason;
+    private String status;
+    private LocalDateTime interestCalculationDate;
+    private Float interestRate;
+    private Float coefficient;
+    private String coefficientAction;
+    private Float minimumInterestRate;
+    private Float minimumInterestRateCoefficient;
+    private String minimumInterestRateCoefficientAction;
+    private Float maximalInterestRate;
+    private Float maximalInterestRateCoefficient;
+    private String maximalInterestRateCoefficientAction;
 }
