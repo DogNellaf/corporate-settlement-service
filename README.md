@@ -1,39 +1,41 @@
 # Corporate Settlement Service
 
-REST-сервис для управления корпоративными расчётными счетами и экземплярами продуктов.
+**English** | [Русский](README.ru.md)
 
-## Описание
+REST service for managing corporate settlement accounts and product instances.
 
-Сервис реализует два бизнес-процесса:
+## Overview
 
-- **CSA (Corporate Settlement Account)** — создание продуктового регистра (расчётного счёта) для существующего экземпляра продукта.
-- **CSI (Corporate Settlement Instance)** — создание нового экземпляра продукта с автоматическим открытием регистров, либо добавление дополнительных соглашений к существующему экземпляру.
+The service implements two business processes:
 
-## Технологии
+- **CSA (Corporate Settlement Account)** — creates a product register (settlement account) for an existing product instance.
+- **CSI (Corporate Settlement Instance)** — creates a new product instance with automatic register opening, or adds supplementary agreements to an existing instance.
+
+## Tech Stack
 
 - Java 11
 - Spring Boot 2.7.9
 - Spring Data JPA / Hibernate
-- PostgreSQL (продуктив), H2 (тесты)
+- PostgreSQL (production), H2 (tests)
 - Maven
 - Lombok
 - Docker / Docker Compose
 
-## Запуск
+## Running
 
-### С Docker Compose
+### With Docker Compose
 
 ```bash
 docker-compose up --build
 ```
 
-Сервис поднимается на порту `8080`, база данных PostgreSQL — на `6541`.
+The service starts on port `8080`, PostgreSQL on `6541`.
 
-### Локально
+### Locally
 
-1. Запустить PostgreSQL (или использовать `docker-compose up db`).
-2. Убедиться, что в `application.properties` указаны корректные параметры подключения.
-3. Запустить сервис:
+1. Start PostgreSQL (or use `docker-compose up db`).
+2. Verify the connection settings in `application.properties`.
+3. Run the service:
 
 ```bash
 ./mvnw spring-boot:run -pl service
@@ -43,25 +45,25 @@ docker-compose up --build
 
 ### POST `/corporate-settlement-account/create`
 
-Создаёт продуктовый регистр (счёт) для существующего экземпляра продукта.
+Creates a product register (account) for an existing product instance.
 
-**Тело запроса:**
+**Request body:**
 
-| Поле              | Тип    | Обязательное | Описание                       |
-|-------------------|--------|:------------:|-------------------------------|
-| `instanceId`      | Long   | ✓            | ИД экземпляра продукта        |
-| `registryTypeCode`| String | ✓            | Код типа регистра             |
-| `currencyCode`    | String |              | Код валюты                    |
-| `branchCode`      | String |              | Код отделения                 |
-| `priorityCode`    | String |              | Код приоритета                |
-| `mdmCode`         | String |              | МДМ-код клиента               |
-| `accountType`     | String |              | Тип счёта                     |
-| `clientCode`      | String |              | Код клиента                   |
-| `trainRegion`     | String |              | Регион обучения               |
-| `counter`         | String |              | Счётчик                       |
-| `salesCode`       | String |              | Код продаж                    |
+| Field             | Type   | Required | Description                  |
+|-------------------|--------|:--------:|------------------------------|
+| `instanceId`      | Long   | ✓        | Product instance ID          |
+| `registryTypeCode`| String | ✓        | Register type code           |
+| `currencyCode`    | String |          | Currency code                |
+| `branchCode`      | String |          | Branch code                  |
+| `priorityCode`    | String |          | Priority code                |
+| `mdmCode`         | String |          | Client MDM code              |
+| `accountType`     | String |          | Account type                 |
+| `clientCode`      | String |          | Client code                  |
+| `trainRegion`     | String |          | Training region              |
+| `counter`         | String |          | Counter                      |
+| `salesCode`       | String |          | Sales code                   |
 
-**Пример ответа:**
+**Response:**
 
 ```json
 {
@@ -75,30 +77,30 @@ docker-compose up --build
 
 ### POST `/corporate-settlement-instance/create`
 
-Создаёт новый экземпляр продукта или добавляет дополнительные соглашения к существующему.
+Creates a new product instance or adds supplementary agreements to an existing one.
 
-**Тело запроса:**
+**Request body:**
 
-| Поле                       | Тип           | Обязательное | Описание                              |
-|----------------------------|---------------|:------------:|--------------------------------------|
-| `instanceId`               | Integer       |              | ИД существующего экземпляра (если указан — режим обновления) |
-| `productType`              | String        | ✓            | Тип продукта                         |
-| `productCode`              | String        | ✓            | Код продукта из каталога             |
-| `registerType`             | String        | ✓            | Тип регистра                         |
-| `mdmCode`                  | String        | ✓            | МДМ-код клиента                      |
-| `contractNumber`           | String        | ✓            | Номер договора                       |
-| `contractDate`             | LocalDateTime | ✓            | Дата договора                        |
-| `priority`                 | Integer       | ✓            | Приоритет                            |
-| `contractId`               | Integer       | ✓            | ИД договора                          |
-| `branchCode`               | String        | ✓            | Код отделения                        |
-| `isoCurrencyCode`          | String        | ✓            | ISO-код валюты                       |
-| `urgencyCode`              | String        | ✓            | Код срочности                        |
-| `interestRatePenalty`      | Float         |              | Процентная ставка пени               |
-| `thresholdAmount`          | Float         |              | Пороговая сумма                      |
-| `taxPercentageRate`        | Float         |              | Налоговая ставка (%)                 |
-| `instanceArrangementDto`   | Array         |              | Список дополнительных соглашений     |
+| Field                      | Type          | Required | Description                                                     |
+|----------------------------|---------------|:--------:|-----------------------------------------------------------------|
+| `instanceId`               | Integer       |          | Existing instance ID (if provided — update mode)               |
+| `productType`              | String        | ✓        | Product type                                                    |
+| `productCode`              | String        | ✓        | Product code from the catalog                                   |
+| `registerType`             | String        | ✓        | Register type                                                   |
+| `mdmCode`                  | String        | ✓        | Client MDM code                                                 |
+| `contractNumber`           | String        | ✓        | Contract number                                                 |
+| `contractDate`             | LocalDateTime | ✓        | Contract date                                                   |
+| `priority`                 | Integer       | ✓        | Priority                                                        |
+| `contractId`               | Integer       | ✓        | Contract ID                                                     |
+| `branchCode`               | String        | ✓        | Branch code                                                     |
+| `isoCurrencyCode`          | String        | ✓        | ISO currency code                                               |
+| `urgencyCode`              | String        | ✓        | Urgency code                                                    |
+| `interestRatePenalty`      | Float         |          | Penalty interest rate                                           |
+| `thresholdAmount`          | Float         |          | Threshold amount                                                |
+| `taxPercentageRate`        | Float         |          | Tax rate (%)                                                    |
+| `instanceArrangementDto`   | Array         |          | List of supplementary agreements                                |
 
-**Пример ответа (создание):**
+**Response (creation):**
 
 ```json
 {
@@ -110,7 +112,7 @@ docker-compose up --build
 }
 ```
 
-**Пример ответа (обновление):**
+**Response (update):**
 
 ```json
 {
@@ -122,34 +124,34 @@ docker-compose up --build
 }
 ```
 
-## Коды ошибок
+## Error Codes
 
-| HTTP-код | Причина                                                            |
-|----------|--------------------------------------------------------------------|
-| 400      | Не заполнено обязательное поле, или запись с такими данными уже существует |
-| 404      | Не найден тип регистра, пул счетов, или экземпляр продукта        |
+| HTTP code | Reason                                                                    |
+|-----------|---------------------------------------------------------------------------|
+| 400       | Required field missing, or a record with the given data already exists    |
+| 404       | Register type, account pool, or product instance not found                |
 
-## Структура базы данных
+## Database Schema
 
-| Таблица                          | Описание                                  |
-|----------------------------------|-------------------------------------------|
-| `tpp_product`                    | Экземпляры продуктов                      |
-| `tpp_product_register`           | Продуктовые регистры (счета)              |
-| `agreement`                      | Дополнительные соглашения                 |
-| `account_pool`                   | Пулы свободных счетов                     |
-| `account`                        | Счёта в пулах                            |
-| `tpp_ref_product_class`          | Справочник классов продуктов              |
-| `tpp_ref_product_register_type`  | Справочник типов регистров                |
-| `tpp_ref_account_type`           | Справочник типов счетов                   |
-| `tpp_template_register_balance`  | Шаблоны балансов регистров                |
+| Table                            | Description                        |
+|----------------------------------|------------------------------------|
+| `tpp_product`                    | Product instances                  |
+| `tpp_product_register`           | Product registers (accounts)       |
+| `agreement`                      | Supplementary agreements           |
+| `account_pool`                   | Free account pools                 |
+| `account`                        | Accounts within pools              |
+| `tpp_ref_product_class`          | Product class reference            |
+| `tpp_ref_product_register_type`  | Register type reference            |
+| `tpp_ref_account_type`           | Account type reference             |
+| `tpp_template_register_balance`  | Register balance templates         |
 
-## Тесты
+## Tests
 
 ```bash
 ./mvnw test -pl service
 ```
 
-Тесты используют встроенную базу данных H2 в режиме совместимости с PostgreSQL. Покрытие контролируется JaCoCo (профиль `coverage`):
+Tests use an in-memory H2 database in PostgreSQL-compatibility mode. Coverage is enforced by JaCoCo (profile `coverage`):
 
 ```bash
 ./mvnw verify -pl service -P coverage
