@@ -172,3 +172,7 @@ docker-compose up --build
 ```bash
 ./mvnw verify -pl service -P coverage
 ```
+
+## Лицензия
+
+[MIT](LICENSE)

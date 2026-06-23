@@ -172,3 +172,7 @@ Tests use an in-memory H2 database in PostgreSQL-compatibility mode. Coverage is
 ```bash
 ./mvnw verify -pl service -P coverage
 ```
+
+## License
+
+[MIT](LICENSE)
