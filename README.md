@@ -1,27 +1,43 @@
 # Corporate Settlement Service
 
-**English** | [Русский](README.ru.md)
+> 🇬🇧 English | [🇷🇺 Русский](README.ru.md)
 
 REST service for managing corporate settlement accounts and product instances.
 
-## Overview
+## Features
 
-The service implements two business processes:
-
-- **CSA (Corporate Settlement Account)** — creates a product register (settlement account) for an existing product instance.
-- **CSI (Corporate Settlement Instance)** — creates a new product instance with automatic register opening, or adds supplementary agreements to an existing instance.
+- **CSA (Corporate Settlement Account)** — creates a product register (settlement account) for an existing product instance
+- **CSI (Corporate Settlement Instance)** — creates a new product instance with automatic register opening, or adds supplementary agreements to an existing instance
+- Structured error responses for missing fields and not-found resources
+- PostgreSQL persistence in production, H2 for tests
+- Test coverage tracked with JaCoCo
 
 ## Tech Stack
 
-- Java 11
-- Spring Boot 2.7.9
-- Spring Data JPA / Hibernate
-- PostgreSQL (production), H2 (tests)
-- Maven
-- Lombok
-- Docker / Docker Compose
+| Layer | Technology |
+|---|---|
+| Language | Java 11 |
+| Framework | Spring Boot 2.7.9 |
+| Persistence | Spring Data JPA / Hibernate |
+| Database | PostgreSQL (production), H2 (tests) |
+| Build Tool | Maven |
+| Utilities | Lombok |
+| Containerization | Docker / Docker Compose |
 
-## Running
+## Requirements
+
+- Java 11+
+- Maven (or use the bundled wrapper `./mvnw`)
+- Docker & Docker Compose (optional, for a containerized run)
+- PostgreSQL (if running locally without Docker)
+
+## Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd <project-folder>
+```
 
 ### With Docker Compose
 
@@ -134,7 +150,7 @@ Creates a new product instance or adds supplementary agreements to an existing o
 ## Database Schema
 
 | Table                            | Description                        |
-|----------------------------------|------------------------------------|
+|----------------------------------|-------------------------------------|
 | `tpp_product`                    | Product instances                  |
 | `tpp_product_register`           | Product registers (accounts)       |
 | `agreement`                      | Supplementary agreements           |
@@ -145,7 +161,7 @@ Creates a new product instance or adds supplementary agreements to an existing o
 | `tpp_ref_account_type`           | Account type reference             |
 | `tpp_template_register_balance`  | Register balance templates         |
 
-## Tests
+## Running Tests
 
 ```bash
 ./mvnw test -pl service
