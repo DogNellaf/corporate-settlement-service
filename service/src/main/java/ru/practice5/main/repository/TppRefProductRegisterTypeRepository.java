@@ -15,9 +15,5 @@ public interface TppRefProductRegisterTypeRepository extends JpaRepository<TppRe
             nativeQuery = true)
     List<TppRefProductRegisterType> findByParams(String value);
 
-    @Query(value = "SELECT * " +
-        "FROM tpp_ref_product_register_type rt " +
-        "WHERE rt.\"value\" = :value",
-        nativeQuery = true)
     Optional<TppRefProductRegisterType> findOneByValue(String value);
 }
