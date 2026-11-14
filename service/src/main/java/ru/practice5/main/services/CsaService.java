@@ -58,11 +58,16 @@ public class CsaService {
         }
 
         var accountPool = accountPools.get(0);
-        var account = accountRepository.findOneByAccountPoolId(accountPool.getId());
+        // The lock is held until this transaction (including a calling CSI transaction)
+        // commits. Concurrent callers recheck occupancy after waiting for the row.
+        var account = accountRepository.findFreeForUpdateByAccountPoolId(accountPool.getId());
         if (account == null) {
             throw new NotFoundException(
-                    "Счёт не найден в пуле с ИД " + accountPool.getId() + ".");
+                    "Свободный счёт не найден в пуле с ИД " + accountPool.getId() + ".");
         }
+
+        account.setBussy(true);
+        accountRepository.save(account);
 
         var entity = new TppProductRegister(
                 null,

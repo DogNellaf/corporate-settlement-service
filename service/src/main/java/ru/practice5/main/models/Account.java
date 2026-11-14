@@ -23,4 +23,12 @@ public class Account {
     private Long id;
     private Long accountPoolId;
     private String accountNumber;
+    // Keep the existing database column name for schema compatibility.
+    private Boolean bussy = false;
+
+    public Account(Long id, Long accountPoolId, String accountNumber) {
+        this.id = id;
+        this.accountPoolId = accountPoolId;
+        this.accountNumber = accountNumber;
+    }
 }

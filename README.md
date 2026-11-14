@@ -12,6 +12,29 @@ REST service for managing corporate settlement accounts and product instances.
 - PostgreSQL persistence in production, H2 for tests
 - Test coverage tracked with JaCoCo
 
+### Account reservation
+
+The service selects a free account with `SELECT … FOR UPDATE`, marks `bussy=true`
+and inserts its product register within the same transaction. Concurrent requests
+wait for the selected row and recheck occupancy; exhausting a pool returns 404.
+Rolling back a calling CSI transaction also rolls back the reservation. Accounts
+already referenced by a register are excluded even if an older installation left
+their occupancy flag unset. Existing duplicate assignments require a separate data
+reconciliation; this change does not rewrite existing registers.
+
+Run all tests with `mvn test`. Run the reservation regression tests against a
+disposable PostgreSQL database with:
+
+```bash
+docker compose -f compose.reservation-tests.yml run --rm test
+docker compose -f compose.reservation-tests.yml down
+```
+
+These tests cover three simultaneous allocations, pool exhaustion, transaction
+rollback and legacy occupancy flags. The test database has no published ports and
+uses temporary storage. Do not point the test runner at an existing database:
+the application's SQL initialization recreates its schema.
+
 ## Tech Stack
 
 | Layer | Technology |

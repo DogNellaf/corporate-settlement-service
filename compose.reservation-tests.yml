@@ -1,0 +1,41 @@
+name: corporate-reservation-tests
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: reservation_test
+      POSTGRES_USER: reservation_test
+      POSTGRES_PASSWORD: reservation_test
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U reservation_test -d reservation_test"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  test:
+    image: maven:3.9-eclipse-temurin-11
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+      - maven_cache:/root/.m2
+    depends_on:
+      db:
+        condition: service_healthy
+    command:
+      - mvn
+      - -B
+      - -pl
+      - service
+      - -Dtest=AccountReservationTests
+      - -Dspring.datasource.url=jdbc:postgresql://db:5432/reservation_test
+      - -Dspring.datasource.driverClassName=org.postgresql.Driver
+      - -Dspring.datasource.username=reservation_test
+      - -Dspring.datasource.password=reservation_test
+      - -Dspring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+      - test
+
+volumes:
+  maven_cache:
