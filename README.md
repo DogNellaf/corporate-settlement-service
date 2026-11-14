@@ -165,6 +165,27 @@ Creates a new product instance or adds supplementary agreements to an existing o
 
 ## Error Codes
 
+Duplicate contracts, `(product_id, type)` register pairs and agreement numbers
+are protected by named database unique constraints. Concurrent duplicate HTTP
+requests return one success and two `400` responses; failed transactions do not
+leave products, registers or reserved accounts behind. Unrelated integrity errors
+remain server errors and do not expose SQL in the response.
+
+Fresh test databases receive these constraints from `schema.sql`. For an existing
+PostgreSQL database, take a backup and apply
+`ops/sql/2026-11-14-unique-business-keys.sql` in a maintenance window, using
+`psql -v ON_ERROR_STOP=1 -f ...`. This script locks the affected tables, aborts if
+historical duplicates exist, and can be safely reapplied. Reconcile those records
+before retrying. Do not use the destructive application schema initializer as an
+upgrade procedure.
+
+The disposable PostgreSQL runner also executes `ConcurrentCreationTests` with
+`-Dsettlement.postgresConcurrency=true`. These tests coordinate actual concurrent
+HTTP calls for contracts, registers and supplementary agreements, asserting one
+success, two duplicate errors and the final database state. No mocks replace
+the repository or service operations. The PostgreSQL-only tests are skipped in
+the default H2 run.
+
 | HTTP code | Reason                                                                    |
 |-----------|---------------------------------------------------------------------------|
 | 400       | Required field missing, or a record with the given data already exists    |

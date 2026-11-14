@@ -29,7 +29,8 @@ services:
       - -B
       - -pl
       - service
-      - -Dtest=AccountReservationTests
+      - -Dtest=AccountReservationTests,ConcurrentCreationTests
+      - -Dsettlement.postgresConcurrency=true
       - -Dspring.datasource.url=jdbc:postgresql://db:5432/reservation_test
       - -Dspring.datasource.driverClassName=org.postgresql.Driver
       - -Dspring.datasource.username=reservation_test

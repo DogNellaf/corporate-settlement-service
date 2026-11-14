@@ -50,7 +50,8 @@ CREATE TABLE IF NOT EXISTS tpp_product_register
     account BIGINT,
     currency_code VARCHAR(30),
     state VARCHAR(50),
-    account_number VARCHAR(25)
+    account_number VARCHAR(25),
+    CONSTRAINT uq_register_product_type UNIQUE (product_id, type)
 );
 
 ALTER TABLE tpp_product_register
@@ -105,7 +106,8 @@ CREATE TABLE IF NOT EXISTS tpp_product
 	interest_rate_type VARCHAR(50),
 	tax_rate DECIMAL,
     reasone_close VARCHAR(100),
-    state VARCHAR(50)
+    state VARCHAR(50),
+    CONSTRAINT uq_product_number UNIQUE (number)
 );
 
 CREATE TABLE IF NOT EXISTS agreement
@@ -132,7 +134,8 @@ CREATE TABLE IF NOT EXISTS agreement
     minimum_interest_rate_coefficient_action VARCHAR(50),
     maximal_interest_rate DECIMAL,
     maximal_interest_rate_coefficient DECIMAL,
-    maximal_interest_rate_coefficient_action VARCHAR(50)
+    maximal_interest_rate_coefficient_action VARCHAR(50),
+    CONSTRAINT uq_agreement_number UNIQUE (number)
 );
 
 ALTER TABLE agreement
